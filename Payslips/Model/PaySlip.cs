@@ -1,19 +1,14 @@
 ﻿using Payslips.Model.Interface;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace Payslips.Model
 {
     public class PaySlip : IPayslip
     {
-        [Required]
         public string Name { get; set;  }
 
         private readonly double _annualIncome;
 
-        [Required]
         private ITaxCalculator _calculator { get; set; }
 
         private PaySlip() { }
@@ -22,7 +17,6 @@ namespace Payslips.Model
         {
             Name = name;
             _calculator = calculator;
-            //_calculator = new TaxCalculator();
             _annualIncome = annualIncome;
         }
 

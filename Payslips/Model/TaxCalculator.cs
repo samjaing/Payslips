@@ -1,8 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
-using Payslips.Model.Interface;
+﻿using Payslips.Model.Interface;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace Payslips.Model

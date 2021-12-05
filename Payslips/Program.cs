@@ -5,7 +5,6 @@ using Payslips.Model.Interface;
 using System;
 using System.Linq;
 
-
 namespace Payslips
 {
     class Program

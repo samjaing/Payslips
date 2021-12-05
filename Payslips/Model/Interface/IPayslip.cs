@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Payslips.Model.Interface
+﻿namespace Payslips.Model.Interface
 {
     public interface IPayslip
     {
