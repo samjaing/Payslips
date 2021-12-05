@@ -25,8 +25,8 @@ namespace Payslips
 
                 try
                 {
-                    var parsedInput = CommandFactory.ParseCommand(inputCommand);
-                    var commandDescription = CommandFactory.GetCommandType(parsedInput.First());
+                    var parsedInput = CommandParser.ParseCommand(inputCommand);
+                    var commandDescription = CommandParser.GetCommandType(parsedInput.First());
                     switch (commandDescription)
                     {
                         case CommandDescription.EXIT:

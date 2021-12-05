@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace Payslips
 {
-    public class CommandFactory
+    public class CommandParser
     {
         public static IList<string> ParseCommand(string userInput)
         {
