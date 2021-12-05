@@ -6,18 +6,18 @@ namespace Payslips.Model
     public class TaxSlab
     {
         [Required]
-        public int SlabStart { get; set; }
+        public double SlabStart { get; set; }
         [Required]
-        public int SlabEnd { get; set; }
+        public double SlabEnd { get; set; }
         [Required]
-        public int TaxPerUnit { get; set; }
+        public double TaxPerUnit { get; set; }
 
         private TaxSlab(){}
 
-        public TaxSlab(int slabStart, int slabEnd, int taxPerUnit)
+        public TaxSlab(double slabStart, double slabEnd, double taxPerUnit)
         {
             //Start value of slab must be less than End value.
-            if (!(SlabStart < SlabEnd))
+            if (!(slabStart < slabEnd))
             {
                 throw new Exception("Slab starting value must be less than the ending value of the slab.");
             }

@@ -18,10 +18,11 @@ namespace Payslips.Model
 
         private PaySlip() { }
 
-        public PaySlip(ITaxCalculator calculator, int annualIncome) 
+        public PaySlip(ITaxCalculator calculator, string name, double annualIncome) 
         {
-            //_calculator = calculator;
-            _calculator = new TaxCalculator();
+            Name = name;
+            _calculator = calculator;
+            //_calculator = new TaxCalculator();
             _annualIncome = annualIncome;
         }
 
