@@ -28,26 +28,19 @@ namespace Payslips
                 {
                     var parsedInput = CommandFactory.ParseCommand(inputCommand);
                     var commandDescription = CommandFactory.GetCommandType(parsedInput.First());
-                    if (CommandFactory.ValidateInput(commandDescription, parsedInput))
+                    switch (commandDescription)
                     {
-                        switch (commandDescription)
-                        {
-                            case CommandDescription.EXIT:
-                                ExitFlag = true;
-                                break;
-                            case CommandDescription.GENERATEMONTHLYPAYSLIP:
-                                var command = new GeneratePaySlipCommand(parsedInput);
-                                PaySlip paySlip = new PaySlip(taxCalculator, command.NameArgument, command.IncomeArgument);
-                                paySlip.GetMonthlyPayslip();
-                                break;
-                            default:
-                                Console.WriteLine("Command not Supported. Please try again");
-                                break;
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid Input. Please try again");
+                        case CommandDescription.EXIT:
+                            ExitFlag = true;
+                            break;
+                        case CommandDescription.GENERATEMONTHLYPAYSLIP:
+                            var command = new GeneratePaySlipCommand(parsedInput);
+                            PaySlip paySlip = new PaySlip(taxCalculator, command.NameArgument, command.IncomeArgument);
+                            paySlip.GetMonthlyPayslip();
+                            break;
+                        default:
+                            Console.WriteLine("Command not Supported. Please try again");
+                            break;
                     }
                 }
                 catch (ArgumentException ex)

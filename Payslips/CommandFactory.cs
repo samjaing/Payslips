@@ -10,46 +10,6 @@ namespace Payslips
 {
     public class CommandFactory
     {
-        public ICommand GetCommand(string command)
-        {
-            var parsed = ParseCommand(command);
-
-            var commandType = GetCommandType(parsed.First());
-
-            switch (commandType)
-            {
-                case CommandDescription.GENERATEMONTHLYPAYSLIP:
-                    return new GeneratePaySlipCommand(parsed);
-
-                case CommandDescription.EXIT:
-                    return new ExitCommand(parsed);
-                default:
-                    throw new ArgumentException("Command not supported.");
-
-            }
-        }
-
-        public static bool ValidateInput(CommandDescription commandType, IList<string> input)
-        {
-            switch (commandType)
-            {
-                case CommandDescription.GENERATEMONTHLYPAYSLIP:
-                    return GeneratePaySlipCommand.ValidateInput(input);
-
-                case CommandDescription.EXIT:
-                    return ExitCommand.ValidateInput(input);
-                default:
-                    throw new ArgumentException("Command not supported.");
-            }
-        }
-
-        public static CommandDescription GetCommandDescription(string command)
-        {
-            var parsed = ParseCommand(command);
-
-            return GetCommandType(parsed.First());
-        }
-
         public static IList<string> ParseCommand(string userInput)
         {
             if (String.IsNullOrEmpty(userInput))
@@ -79,11 +39,11 @@ namespace Payslips
         public static CommandDescription GetCommandType(string command)
         {
             CommandDescription cmd;
-
+            command = command.ToUpper();
             //Enum.TryParse successfull parese any integer string without confirming if the integer string is defined for the ENUM or not.
             //So this check ensures if the passed string is defined in the ENUM.
 
-            if (!Enum.IsDefined(typeof(CommandDescription), command))
+            if (!Enum.IsDefined(typeof(CommandDescription), command.ToUpper()))
             {
                 throw new ArgumentException("Command not found.");
             }

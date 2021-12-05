@@ -2,11 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Payslips.Model.Commands
 {
-    public class ExitCommand : BaseCommand
+    public class ExitCommand : ICommand
     {
         const CommandDescription Name = CommandDescription.EXIT;
 

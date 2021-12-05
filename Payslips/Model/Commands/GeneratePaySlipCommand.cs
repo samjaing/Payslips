@@ -2,22 +2,23 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Payslips.Model.Commands
 {
-    public class GeneratePaySlipCommand : BaseCommand
+    public class GeneratePaySlipCommand : ICommand
     {
         const CommandDescription Name = CommandDescription.GENERATEMONTHLYPAYSLIP;
         
         public string NameArgument { get; set; }
         public double IncomeArgument { get; set; }
+
+        private const string CommandFormat = "GenerateMonthlyPayslip \"<EmpName>\" <AnnualSalary>";
         
         public GeneratePaySlipCommand(IList<string> parsedInput)
         {
             if(!ValidateInput(parsedInput))
             {
-                throw new ArgumentException("Invalid Command: wrong format");
+                throw new ArgumentException($"Invalid Command: wrong format.\n Correct usage {CommandFormat}");
             }
 
             NameArgument = parsedInput.ElementAt(1);
@@ -28,30 +29,27 @@ namespace Payslips.Model.Commands
         {
             if (inputCommand == null)
             {
-                throw new ArgumentException("Invalid Command: wrong format");
+                throw new ArgumentException($"Invalid Command: wrong format.\n Correct usage {CommandFormat}");
             }
             if (!inputCommand.Any() || (inputCommand.Count() != 3))
             {
-                var message = "Invalid Command: wrong format";
-                throw new ArgumentException(message);
+                throw new ArgumentException($"Invalid Command: wrong number of arguments.\n Correct usage {CommandFormat}");
             }
 
-            if (Name.ToString() != inputCommand.First())
+            if (Name.ToString() != inputCommand.First().ToUpper())
             {
-                var message = "Invalid Command: wrong format";
-                throw new ArgumentException(message);
+                throw new ArgumentException($"Invalid Command: wrong format.\n Correct usage {CommandFormat}");
             }
 
 
             if (string.IsNullOrEmpty(inputCommand.ElementAt(1)))
             {
-                var message = "Please provide valid name.";
-                throw new ArgumentException(message);
+                throw new ArgumentException($"Invalid Command: Please provide valid name.\n Correct usage {CommandFormat}");
             }
 
             if(GetIncomeArgument(inputCommand.ElementAt(2)) < 0 )
             {
-                throw new ArgumentException("Invalid Command: Please provide a valid income.");
+                throw new ArgumentException("Invalid Command: Please provide a valid income.\n Correct usage {CommandFormat}");
             }
             return true;
         }
