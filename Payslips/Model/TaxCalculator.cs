@@ -9,13 +9,18 @@ namespace Payslips.Model
 {
     public class TaxCalculator : ITaxCalculator
     {
-        [Required]
-        IList<TaxSlab> Slabs { get; set; }
-        //public TaxCalculator(IConfigurationBuilder builder)
+        public IList<TaxSlab> Slabs { get; set; }
         public TaxCalculator()
         {
             Slabs = new List<TaxSlab>();
             SetSlabs(Slabs);
+        }
+
+        public TaxCalculator(IList<TaxSlab> slabs)
+        {
+            if (!slabs.Any())
+                throw new Exception("Slabs not defined.");
+            Slabs = slabs;
         }
 
         public double CalculateTax(double annualIncome)

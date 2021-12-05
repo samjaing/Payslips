@@ -27,7 +27,7 @@ namespace Payslips.Model
         }
 
         private double GrossMonthlyIncome => _annualIncome / 12;
-        private double MonthlyIncomeTax => _calculator.CalculateTax(_annualIncome);
+        private double MonthlyIncomeTax => _calculator.CalculateTax(_annualIncome) /12;
         private double NetMonthlyIncome => GrossMonthlyIncome - MonthlyIncomeTax;
         public void GetMonthlyPayslip()
         {

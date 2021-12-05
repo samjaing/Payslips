@@ -5,11 +5,8 @@ namespace Payslips.Model
 {
     public class TaxSlab
     {
-        [Required]
         public double SlabStart { get; set; }
-        [Required]
         public double SlabEnd { get; set; }
-        [Required]
         public double TaxPerUnit { get; set; }
 
         private TaxSlab(){}
@@ -29,7 +26,8 @@ namespace Payslips.Model
 
         public double GetTaxForSlab(double annualSalary)
         {
-            double taxableIncome = 0;
+            double taxableIncome;
+            var adjustRange = SlabStart % 2 == 0 ? 0 : 1;
             
             // 0 Tax if annual salary does not lie in this slab.
             if (annualSalary < SlabStart)
@@ -38,11 +36,11 @@ namespace Payslips.Model
             }
             else if (annualSalary >= SlabEnd)
             {
-                taxableIncome = (SlabEnd - (SlabStart - 1));
+                taxableIncome = (SlabEnd - (SlabStart - adjustRange));
             }
             else
             {
-                taxableIncome = (annualSalary - (SlabStart - 1));
+                taxableIncome = (annualSalary - (SlabStart - adjustRange));
             }
 
             return taxableIncome * TaxPerUnit;
