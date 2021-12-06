@@ -56,7 +56,7 @@ User has generated Payslip for an employee using command GenerateMonthlyPayslip 
 
 ![Sample Execution](SampleExecution.png)
 
-## Improvements Required
+## Improvements Scope
 
 There is always a better way.
 This repository code can be improved in following ways:
