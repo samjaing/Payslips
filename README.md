@@ -33,8 +33,8 @@ The follwoing annual tax rates apply:
 - if Command is GenerateMonthly Payslip with required arguments then an instance of Payslip
   will be instantiated. Payslip has tax calculator that will calculate the tax.
 - PaySlip GetMonthlyPayslip will display the generated payslip on console. 
- 
-![Flow](Flow.png)
+
+ ![App Flow](AppFlow.png)
 
 ## Instruction to complie the code
 IMPROVE IT
