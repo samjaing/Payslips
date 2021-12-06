@@ -5,8 +5,16 @@ using Xunit;
 
 namespace PayslipTest
 {
+    /// <summary>
+    /// TaxCalculatorTest will test the functionality of class TaxCalculator.
+    /// </summary>
     public class TaxCalculatorTest
     {
+        /// <summary>
+        /// Calculate tax on various input including edge conditions
+        /// </summary>
+        /// <param name="annualIncome"> Annual income on which tax need to be calculated.</param>
+        /// <param name="expectedAnnualTax"> Expecte annual tax on the provided annual income.</param>
         [Theory]
         [InlineData(0,0)]
         [InlineData(20000, 0)]
@@ -25,6 +33,9 @@ namespace PayslipTest
             Assert.Equal(expectedAnnualTax, calculatedTax);
         }
 
+        /// <summary>
+        /// Creating a TaxCalculater without slab information should fail.
+        /// </summary>
         [Fact]
         public void TaxCalculatro_NoSlabs_ShouldFail()
         {

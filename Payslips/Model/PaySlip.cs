@@ -3,6 +3,10 @@ using System;
 
 namespace Payslips.Model
 {
+    /// <summary>
+    /// Payslip is the model for payslips containing all essential fields.
+    /// Payslip has ITaxCalculator which is resposible for calculating the tax in this payslip.
+    /// </summary>
     public class PaySlip : IPayslip
     {
         public string Name { get; set;  }
@@ -24,9 +28,13 @@ namespace Payslips.Model
         public double MonthlyIncomeTax => _calculator.CalculateTax(_annualIncome) /12;
         public double NetMonthlyIncome => GrossMonthlyIncome - MonthlyIncomeTax;
 
+        /// <summary>
+        /// Return the Tax and income related information from this Payslip.
+        /// </summary>
         public void GetMonthlyPayslip()
         {
-            //Change it to retrun some structure.
+            //As this is a console app we are printing the payslip as per requirement.
+            //IMPROVMENT: It should return an object with the required info and then that object should be consumed by the caller.
             Console.WriteLine($"Monthly Payslip for: {Name}");
             Console.WriteLine($"Gross Monthly Income: {GrossMonthlyIncome}");
             Console.WriteLine($"Monthly Income Tax: {MonthlyIncomeTax}");

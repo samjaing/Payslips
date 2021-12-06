@@ -2,6 +2,9 @@
 
 namespace Payslips.Model
 {
+    /// <summary>
+    /// TaxSlab has the information about the tax rate and the rang of amount 
+    /// on which tax will be calculated using tax rate.    /// </summary>
     public class TaxSlab
     {
         public double SlabStart { get; set; }
@@ -22,11 +25,16 @@ namespace Payslips.Model
             SlabEnd = slabEnd;
             TaxPerUnit = taxPerUnit;
         }
-
+        
+        /// <summary>
+        /// Calute the tax based on the income range and rate for a SLAB.
+        /// </summary>
+        /// <param name="annualSalary"></param>
+        /// <returns>Tax for the slab.</returns>
         public double GetTaxForSlab(double annualSalary)
         {
             double taxableIncome;
-            var adjustRange = SlabStart % 2 == 0 ? 0 : 1;
+            var adjustmentFactor = SlabStart % 2 == 0 ? 0 : 1;
             
             // 0 Tax if annual salary does not lie in this slab.
             if (annualSalary < SlabStart)
@@ -35,11 +43,11 @@ namespace Payslips.Model
             }
             else if (annualSalary >= SlabEnd)
             {
-                taxableIncome = (SlabEnd - (SlabStart - adjustRange));
+                taxableIncome = (SlabEnd - (SlabStart - adjustmentFactor));
             }
             else
             {
-                taxableIncome = (annualSalary - (SlabStart - adjustRange));
+                taxableIncome = (annualSalary - (SlabStart - adjustmentFactor));
             }
 
             return taxableIncome * TaxPerUnit;

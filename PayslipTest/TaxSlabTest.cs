@@ -4,6 +4,9 @@ using Xunit;
 
 namespace PayslipTest
 {
+    /// <summary>
+    /// TaxSlabTest will test the functionality of class TaxSlab.
+    /// </summary>
     public class TaxSlabTest
     {
         [Fact]
@@ -12,6 +15,14 @@ namespace PayslipTest
             Assert.Throws<Exception>(()=>new TaxSlab(2000,1000,4));
         }
 
+        /// <summary>
+        /// Calculate Tax for a slab.
+        /// </summary>
+        /// <param name="slabStart">Starting value of the slab range.</param>
+        /// <param name="slabEnd">Ending value of the slab range.</param>
+        /// <param name="taxPerUnit">Tax rate per unit.</param>
+        /// <param name="annualIncome">Annual income on which tax will be calculated.</param>
+        /// <param name="expectedTaxForSlab">Expected tax on the provided annual income.</param>
         [Theory]
         [InlineData(0, 2000,0.1,0,0)]
         [InlineData(0, 2000, 0.1, 3000, 200)]

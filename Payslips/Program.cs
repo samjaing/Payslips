@@ -18,6 +18,7 @@ namespace Payslips
             while (!ExitFlag)
             {
                 Console.Write("Cmd>>");
+                //Get input from user.
                 string inputCommand = Console.ReadLine();
 
                 if (string.IsNullOrEmpty(inputCommand) || string.IsNullOrWhiteSpace(inputCommand))
@@ -25,6 +26,7 @@ namespace Payslips
 
                 try
                 {
+                    //Parse the user input and ge the command which needs to execute.
                     var parsedInput = CommandParser.ParseCommand(inputCommand);
                     var commandDescription = CommandParser.GetCommandType(parsedInput.First());
                     switch (commandDescription)
@@ -34,6 +36,8 @@ namespace Payslips
                             break;
                         case CommandDescription.GENERATEMONTHLYPAYSLIP:
                             var command = new GeneratePaySlipCommand(parsedInput);
+                            //IMPROVEMENT : taxCalculator should not be directly passed to PaySlip constructor
+                            //It should be added to dependency injection container.
                             PaySlip paySlip = new PaySlip(taxCalculator, command.NameArgument, command.IncomeArgument);
                             paySlip.GetMonthlyPayslip();
                             break;
